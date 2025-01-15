@@ -35,10 +35,11 @@ for await (const model of listModels({
     }
 })) {
     if (model.likes < 2000) {
-        const listItem = document.createElement('li');
-        listItem.textContent = `${serialNumber}. Skipping ${model.name} because it has less than 2000 likes`;
-        list.appendChild(listItem);
-        serialNumber++;
+        // const listItem = document.createElement('li');
+        // listItem.textContent = `${serialNumber}. Skipping ${model.name} because it has less than 2000 likes`;
+        // list.appendChild(listItem);
+        // serialNumber++;
+        console.log(`${model.likes} Likes: https://huggingface.co/${model.name}`)
         continue;
     } 
     
@@ -47,10 +48,19 @@ for await (const model of listModels({
     }
 }
 
-// Log the models to the list
-models.forEach(model => {
+// // Log the models to the list
+// models.forEach(model => {
+//     const listItem = document.createElement('li');
+//     listItem.textContent = `${serialNumber}. ${JSON.stringify(model, null, 2)}`;
+//     list.appendChild(listItem);
+//     serialNumber++;
+// });
+
+models.sort((model1, model2) => model2.likes - model1.likes)
+for (const model of models) {
     const listItem = document.createElement('li');
-    listItem.textContent = `${serialNumber}. ${JSON.stringify(model, null, 2)}`;
+    listItem.textContent = `${serialNumber}. ${model.likes} Likes: https://huggingface.co/${model.name}`;
     list.appendChild(listItem);
     serialNumber++;
-});
+    console.log(`${model.likes} Likes: https://huggingface.co/${model.name}`)
+}
