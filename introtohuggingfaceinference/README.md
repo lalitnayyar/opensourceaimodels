@@ -6,6 +6,15 @@ npm start
 ```
 
 Head over to https://vitejs.dev/ to learn more about configuring vite
+
+## Code Description
+
+This project demonstrates how to use Hugging Face's inference API with a simple frontend application. The main components of the project include:
+
+- `src/App.js`: The main React component that handles user input and displays the results.
+- `src/api.js`: Contains functions to interact with the Hugging Face API.
+- `src/styles.css`: Basic styling for the application.
+
 ## About Scrimba
 
 At Scrimba our goal is to create the best possible coding school at the cost of a gym membership! 💜
