@@ -1,6 +1,7 @@
 {
   "name": "Scrim-s05peck",
   "description": "https://scrimba.com/open-source-ai-models-c0lp0ta5gp/~07tj",
+  "type": "module",
   "scripts": {
     "start": "vite",
     "dev": "vite",
@@ -9,7 +10,7 @@
   },
   "dependencies": {
     "@huggingface/inference": "2.6.1",
+    "dotenv": "^16.4.7",
     "vite": "latest"
-  },
-  "devDependencies": {}
+  }
 }
