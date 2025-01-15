@@ -1,0 +1,17 @@
+{
+  "name": "Scrim-s05rntj",
+  "description": "https://scrimba.com/open-source-ai-models-c0lp0ta5gp/~05p5",
+  "scripts": {
+    "start": "vite",
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "vite": "latest",
+    "@xenova/transformers": "^2.8.0"
+  },
+  "devDependencies": {
+    "vite": "^4.0.0"
+  }
+}
