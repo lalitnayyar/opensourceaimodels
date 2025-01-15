@@ -10,7 +10,8 @@ const textToGenerate = "The definition of machine learning inference is "
 
 async function generateText() {
   const response = await hf.textGeneration({
-    inputs: textToGenerate
+    inputs: textToGenerate,
+    model:"HuggingFaceH4/zephyr-7b-beta"
   })
   console.log(response)
   const textarea = document.createElement('textarea')
