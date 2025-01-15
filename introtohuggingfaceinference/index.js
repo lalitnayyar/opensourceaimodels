@@ -18,7 +18,7 @@ async function generateText() {
   textarea.style.backgroundColor = 'yellow'
   textarea.style.width = '200%'
   textarea.style.height = '200px'
-  textarea.value = JSON.stringify(response, null, 2)
+  textarea.value = JSON.stringify(response, null, 2) + response[0].label
   document.body.appendChild(textarea)
 }
 
