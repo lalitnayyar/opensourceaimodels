@@ -6,19 +6,23 @@ import { HfInference } from '@huggingface/inference'
 const hf = new HfInference(import.meta.env.VITE_HF_TOKEN)
 // Hugging Face Inference API docs: https://huggingface.co/docs/huggingface.js/inference/README
 
-const textToClassify = "I just bought a new camera. It's been a real disappointment."
+const textToTranslate = "It's an exciting time to be an AI engineer"
 
 async function generateText() {
-    const response = await hf.textClassification({
-    model: "SamLowe/roberta-base-go_emotions",
-    inputs: textToClassify
+  const textTranslationResponse = await hf.translation({
+    model: 'facebook/mbart-large-50-many-to-many-mmt',
+    inputs: textToTranslate,
+    parameters: {
+      src_lang: "en_XX",
+      tgt_lang: "hi_IN"
+    }
   })
-  console.log(response)
+  console.log(textTranslationResponse)
   const textarea = document.createElement('textarea')
   textarea.style.backgroundColor = 'yellow'
-  textarea.style.width = '200%'
+  textarea.style.width = '100%'
   textarea.style.height = '200px'
-  textarea.value = JSON.stringify(response) + response[0].label
+  textarea.value =  textToTranslate+ ' - Translated to -'+JSON.stringify(textTranslationResponse, null, 2)
   document.body.appendChild(textarea)
 }
 
