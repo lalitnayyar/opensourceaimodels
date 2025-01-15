@@ -5,21 +5,52 @@ import { listModels } from "@huggingface/hub";
 // Learn more: https://scrimba.com/links/env-variables
 const token = import.meta.env.VITE_HF_TOKEN
 
-// Create a textarea element
-const textarea = document.createElement('textarea');
-textarea.style.width = '300%';
-textarea.style.height = '600px';
-document.body.appendChild(textarea);
+// Create a list element
+const list = document.createElement('ul');
+list.style.width = '100%';
+list.style.height = '500px';
+list.style.color = 'white'; // Set list text color to white
+document.body.appendChild(list);
+
+// HuggingFace.js Hub Docs: https://huggingface.co/docs/huggingface.js/hub/README
+
+// Challenge 1: Get Text To Image Models with inference enabled and 2000+ likes
+
+async function isModelInferenceEnabled(modelName) {
+    const response = await fetch(`https://api-inference.huggingface.co/status/${modelName}`)
+    const data = await response.json()
+    return data.state == "Loadable"
+}
+
+const models = []
+
+let serialNumber = 1;
 
 for await (const model of listModels({
     credentials: {
         accessToken: token
     },
     search: {
-        task: "text-generation"
+        task: "text-to-image"
     }
 })) {
-    // Log the model to the textarea
-    textarea.value += JSON.stringify(model, null, 2) + '\n';
-    break
+    if (model.likes < 2000) {
+        const listItem = document.createElement('li');
+        listItem.textContent = `${serialNumber}. Skipping ${model.name} because it has less than 2000 likes`;
+        list.appendChild(listItem);
+        serialNumber++;
+        continue;
+    } 
+    
+    if (await isModelInferenceEnabled(model.name)) {
+        models.push(model);
+    }
 }
+
+// Log the models to the list
+models.forEach(model => {
+    const listItem = document.createElement('li');
+    listItem.textContent = `${serialNumber}. ${JSON.stringify(model, null, 2)}`;
+    list.appendChild(listItem);
+    serialNumber++;
+});
