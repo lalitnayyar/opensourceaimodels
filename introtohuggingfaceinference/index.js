@@ -6,11 +6,11 @@ import { HfInference } from '@huggingface/inference'
 const hf = new HfInference(import.meta.env.VITE_HF_TOKEN)
 // Hugging Face Inference API docs: https://huggingface.co/docs/huggingface.js/inference/README
 
-const textToClassify = "The definition of machine learning inference is "
+const textToClassify = "I just bought a new camera. It's been a real disappointment."
 
 async function generateText() {
     const response = await hf.textClassification({
-    model: "distilbert-base-uncased-finetuned-sst-2-english",
+    model: "SamLowe/roberta-base-go_emotions",
     inputs: textToClassify
   })
   console.log(response)
@@ -18,7 +18,7 @@ async function generateText() {
   textarea.style.backgroundColor = 'yellow'
   textarea.style.width = '200%'
   textarea.style.height = '200px'
-  textarea.value = JSON.stringify(response, null, 2) + response[0].label
+  textarea.value = JSON.stringify(response) + response[0].label
   document.body.appendChild(textarea)
 }
 
